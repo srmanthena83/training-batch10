@@ -1,0 +1,21 @@
+---
+- hosts: dev
+  tasks:
+  - name: This is to install httpd web server
+    yum:
+     name: httpd
+     state: present
+  - name: setart web service
+    service:
+     name: httpd
+	   state: started
+  - name: Copy index.html file to target
+    become: yes
+    file:
+	  src: index.html
+	  dest: /var/www/html/
+   - name: Copy httpd.conf file to target
+    become: yes
+    file:
+	  src: httpd.conf
+	  dest: /etc/httpd/conf/
